@@ -8,6 +8,8 @@ int sqr( int x)
     return x * x;
 }
 
+
+
 int main()
 {
     Frame * frame = (Frame *)malloc(sizeof(Frame));
@@ -39,13 +41,16 @@ int main()
         {
             frame->penColor = yellowF;
             frame->penWchar = 0x2588;
-            drawCircle(frame, xCenter, yCenter, sqrt(r));
+            // drawCircle(frame, xCenter, yCenter, sqrt(r));
+            Plot(frame, x, y);
         }
         wchar_t debugStr[256];
         swprintf_s(debugStr, 256, L"%d %d %d %d %d", x, y, xCenter, yCenter, sqr(x - xCenter) );
         drawText(frame, 0, 0, debugStr, wcslen(debugStr), whiteF);
         display(frame);
     }
+
+    make2DConsole(frame, 10, 16, L"Your title");
 
     frameDeinit(frame);
     free(frame);

@@ -60,6 +60,7 @@ void GetWindowPos( Frame * frame )
     frame->consoleRangeStartx = x;
     frame->consoleRangeStarty = y;
 }
+
 float getMouseX( Frame * frame )
 {
     GetCursorPos(&(frame->p));
@@ -102,7 +103,7 @@ void Plot( Frame * frame, float x, float y)
     }
 }
 
-// BRESENHAM's LINE ALGO
+
 void drawLine( Frame * frame, float x2, float y2, float x1,
                float y1)
 {
