@@ -59,27 +59,10 @@ void drawBackground( Frame * frame, short col);
 float getMouseX( Frame * frame );
 float getMouseY( Frame * frame );
 void Plot( Frame * frame, float x, float y);
-void drawLine(Frame * frame, float x2, float y2,
-               float x1, float y1);
 void drawText( Frame * frame, int x, int y, const wchar_t * text,
                int size, short col);
 
-
-
 void make2DConsole(Frame * frame, int fontw, int fonth, LPCWSTR title);
-
-void drawRectangle(Frame * frame, float x, float y,
-                   int b_width, int b_height);
-
-void clip(int * x, int * y);
-
-void fillFrame(Frame * frame, int x1, int y1, int x2, int y2);
-
-void drawCircle(Frame * frame, float xc, float yc, float r);
-
-void drawTriangle(Frame * frame, float x1, float y1, float x2,
-                  float y2, float x3, float y3,
-                  float angle, short col);
 
 
 #endif

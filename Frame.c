@@ -146,36 +146,6 @@ void make2DConsole(Frame *frame, int fontw, int fonth, LPCWSTR title)
     frame->fontW = fontw;
 }
 
-void drawRectangle(Frame * frame, float x, float y, int b_width, int b_height)
-{
-    // float tempx;
-    // float tempy;
-    // const float xoffset = -b_width / 2;
-    // const float yoffset = -b_height / 2;
-    // for (float i = 0; i <= b_height; i += 0.1)
-    // {
-    // 	for (float j = 0; j <= b_width; j += 0.1)
-    // 	{
-    // 		tempx = ((xoffset + j) * cos(angle) - (yoffset + i) * sin(angle));
-    // 		tempy = ((xoffset + j) * sin(angle) + (yoffset + i) * cos(angle));
-
-    // 		Plot(tempx - xoffset + x, tempy - yoffset + y, col);
-    // 	}
-    // }
-    float tempx;
-    float tempy;
-    for (float i = 0; i <= b_height; i += 0.1)
-    {
-        for (float j = 0; j <= b_width; j += 0.1)
-        {
-            tempx = x + j;
-            tempy = y + i;
-
-            Plot(frame, tempx, tempy);
-        }
-    }
-}
-
 void clip(int * x, int * y)
 {
     if (*x < 0) *x = 0;
@@ -184,63 +154,3 @@ void clip(int * x, int * y)
     if (*y >= S_HEIGHT) *y = S_HEIGHT;
 }
 
-void fillFrame(Frame * frame, int x1, int y1, int x2, int y2)
-{
-    clip(&x1, &y1);
-    clip(&x2, &y2);
-    for (int x = x1; x < x2; x++)
-        for (int y = y1; y < y2; y++)
-            Plot(frame, x, y);
-}
-
-void drawCircle(Frame * frame, float xc, float yc, float r)
-{
-    float x = -1;
-    float y = r;
-
-    Plot(frame, x + xc, y + yc);
-    float pk = 3 - 2 * r;
-    while (y > x)
-    {
-
-        if (pk < 0)
-        {
-            pk += 4 * x + 6;
-            x += 1;
-        }
-        else
-        {
-            pk += 4 * (x - y) + 10;
-            x = x + 1;
-            y -= 1;
-        }
-
-        float xCoords[8] = { x, y,  y,  x, -x, -y, -y, -x };
-        float yCoords[8] = { y, x, -x, -y, -y, -x,  x,  y };
-        int i;
-        for (i = 0; i < 8; i++)
-            Plot(frame, xCoords[i] + xc, yCoords[i] + yc);
-    }
-}
-
-void drawTriangle(Frame * frame, float x1, float y1,
-                  float x2, float y2, float x3, float y3, float angle,
-                  short col)
-{
-    float tempx, tempy, tempx_a, tempy_a;
-    tempx = ((x1)*cos(angle) - (y1)*sin(angle));
-    tempy = ((x1)*sin(angle) + (y1)*cos(angle));
-    tempx_a = ((x2)*cos(angle) - (y2)*sin(angle));
-    tempy_a = ((x2)*sin(angle) + (y2)*cos(angle));
-
-    drawLine(frame, tempx, tempy, tempx_a, tempy_a);
-    tempx = ((x3)*cos(angle) - (y3)*sin(angle));
-    tempy = ((x3)*sin(angle) + (y3)*cos(angle));
-
-    drawLine(frame, tempx_a, tempy_a, tempx, tempy);
-
-    tempx_a = ((x1)*cos(angle) - (y1)*sin(angle));
-    tempy_a = ((x1)*sin(angle) + (y1)*cos(angle));
-
-    drawLine(frame, tempx, tempy, tempx_a, tempy_a);
-}

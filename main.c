@@ -41,7 +41,6 @@ int main()
         {
             frame->penColor = yellowF;
             frame->penWchar = 0x2588;
-            // drawCircle(frame, xCenter, yCenter, sqrt(r));
             Plot(frame, x, y);
         }
         wchar_t debugStr[256];
@@ -54,47 +53,4 @@ int main()
 
     frameDeinit(frame);
     free(frame);
-
-//    while (1)
-//    {
-
-//        drawBackground(&frame);
-//        p.FillRays();
-//        if (GetAsyncKeyState(VK_SPACE))
-//        {
-//            button = !button;
-//            Sleep(800);
-//        }
-//        p.update(getMouseX(&frame), getMouseY(&frame));
-
-//        if (GetAsyncKeyState(VK_RETURN))
-//        {
-//            walls.clear();
-//            std::vector<std::pair<int, int>> xcoords{{3, S_WIDTH - 3}, {3, S_WIDTH - 3}, {3, 3}, {S_WIDTH - 3, S_WIDTH - 3}};
-//            std::vector<std::pair<int, int>> ycoords{{2, 2}, {S_HEIGHT - 3, S_HEIGHT - 3}, {2, S_HEIGHT - 3}, {2, S_HEIGHT - 3}};
-//            for (int i = 0; i < 4; i++)
-//            {
-//                walls.push_back(Boundary(xcoords[i].first, ycoords[i].first, xcoords[i].second, ycoords[i].second, redF));
-//            }
-//            Sleep(800);
-//        }
-//        if (GetAsyncKeyState((VK_LBUTTON)))
-//        {
-//            drawLineAsBoundary(&frame, walls);
-//        }
-//        if (GetAsyncKeyState(0x42))
-//        {
-//            drawBlocksAsBoundary(&frame, walls);
-//        }
-//        for (Boundary wall : walls)
-//        {
-//            wall.show(&frame);
-//        }
-//        if (button)
-//            p.look(walls, &frame);
-
-//        display(&frame);
-
-//        CHECK_USER_EXIT
-//    }
 }
