@@ -58,7 +58,7 @@ void display( Frame * frame );
 void drawBackground( Frame * frame, short col);
 float getMouseX( Frame * frame );
 float getMouseY( Frame * frame );
-void Plot( Frame * frame, float x, float y);
+void paint_pixel( Frame * frame, float x, float y);
 void drawText( Frame * frame, int x, int y, const wchar_t * text,
                int size, short col);
 

@@ -92,7 +92,7 @@ void drawBackground( Frame * frame, short col)
     }
 }
 
-void Plot( Frame * frame, float x, float y)
+void paint_pixel( Frame * frame, float x, float y)
 {
     x += frame->center_x;
     y += frame->center_y;
