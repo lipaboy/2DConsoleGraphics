@@ -43,6 +43,26 @@ int main()
     frameDeinit(frame);
     free(frame);
 }
+
+void line(Frame *frame,int x,int y,int x1,int y1)
+{
+    if (y==y1)// горизонтальная линия
+    {
+        while (x != x1)
+        {
+            paint_pixel(frame, x, y);
+            x += 1;
+        }
+    }
+    if (x==x1)// вертикальная линия
+    {
+        while (y != y1)
+        {
+            paint_pixel(frame, x, y);
+            y += 1;
+        }
+    }
+}
 void square(Frame *frame, int *per)
 {
     int x = 12;
@@ -53,30 +73,21 @@ void square(Frame *frame, int *per)
     wchar_t debugStr[256];
     swprintf_s(debugStr, 256, L" %d %d %d", x, y, *per);
     drawText(frame, 0, 0, debugStr, wcslen(debugStr), whiteF);
-    while (x != 46 + *per)
-    {
-        paint_pixel(frame, x, y);
-        x += 1;
-    }
-    while (y != 46)
-    {
-        paint_pixel(frame, x, y);
-        y += 1;
-    }
-    int f = 12;
-    int d = 7;
-    while (d != 46)
-    {
-        paint_pixel(frame, f, d);
-        d += 1;
-    }
-    while (f != 47 + *per)
-    {
-        paint_pixel(frame, f, d);
-        f += 1;
-    }
+
+    line(frame, 12+ *per,7,46+ *per,7);//X
+    line(frame, 12+ *per,7,12+ *per,46);//Y
+    line(frame, 12+ *per,46,46+ *per,46);//X
+    line(frame, 46+ *per,7,46+ *per,47);
+    
     if (GetAsyncKeyState(VK_RIGHT))
     {
         *per += 1;
+        Sleep(100);
     }
+    if (GetAsyncKeyState(VK_LEFT))
+    {
+        *per -= 1;
+        Sleep(100);
+    }
+
 }
