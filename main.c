@@ -8,9 +8,8 @@ int sqr(int x)
     return x * x;
 }
 
-void square(Frame *frame, int *per,int x,int y);
+void square(Frame *frame, int *per,int x,int y,short Colour,int newline);
 void moveXY(int  *const p_x,int  * const p_is_right,int znach);
-void moveY(int  *const p_y,int  * const p_is_Up,int znach);
 int main()
 
 {
@@ -27,9 +26,14 @@ int main()
     display(frame);
     int x=12;
     int y=7;
+    int x1=40;
+    int y1=2;
     int per = 0;
     int is_right=1;
     int is_Up=1;
+    int is_right1=0;
+    int is_Up1=1;
+    int newline=17;
     
     while (1)
     {
@@ -40,12 +44,19 @@ int main()
 
         drawBackground(frame, blackF);
 
-        square(frame, &per,x,y);
+        square(frame,&per,x,y,redF,newline);
+        square(frame, &per,x1,y1,yellowF,newline);
         display(frame);
-        moveXY(&x,&is_right,40);
+        if (x+newline>=x1)
+        {
+            is_right1=1-is_right1;
+            is_right=1-is_right;
+        }
+        moveXY(&x,&is_right,74 -newline);
         Sleep(100);
-        moveXY(&y,&is_Up,40);
-
+        moveXY(&y,&is_Up,74 -newline);
+        moveXY(&x1,&is_right1,74 -newline);
+        moveXY(&y1,&is_Up1,74 -newline);
 
 
         
@@ -64,23 +75,23 @@ int main()
 }
 
 
-void moveXY(int  *const p_xy,int  * const p_is_forward,int border)
+void moveXY(int  *const p_coordinate,int  * const p_is_forward,int border)
 {
-    if ((*p_xy)!=border && (*p_is_forward)==1)
+    if ((*p_coordinate)!=border && (*p_is_forward)==1)
     {   
-        (*p_xy)+=1;
+        (*p_coordinate)+=1;
         
     }
-    if (*p_xy==border)
+    if (*p_coordinate==border)
     {
         (*p_is_forward)=0;
     }
-    if ((*p_xy)!=1 && (*p_is_forward)==0)
+    if ((*p_coordinate)!=1 && (*p_is_forward)==0)
     {   
-        (*p_xy)-=1;
+        (*p_coordinate)-=1;
         
     }
-    if (*p_xy==1)
+    if (*p_coordinate==1)
     {
         (*p_is_forward)=1;
     }
@@ -109,19 +120,18 @@ void line(Frame *frame,int x,int y,int x1,int y1)
     }
 }
 
-void square(Frame *frame, int *per,int x,int y)
+void square(Frame *frame, int *per,int x,int y,short Colour,int newline)
 {
     
-    frame->penColor = yellowF;
+    frame->penColor =Colour;
     frame->penWchar = 0x2588;
     wchar_t debugStr[256];
     swprintf_s(debugStr, 256, L" %d %d %d", x, y, *per);
     drawText(frame, 0, 0, debugStr, wcslen(debugStr), whiteF);
-
-    line(frame, x+ *per,y,x+34+ *per,y);//X
-    line(frame, x+ *per,y,x+ *per,y+34);//Y
-    line(frame, x+ *per,y+34,x+34+ *per,y+34);//X
-    line(frame, x+34+ *per,y,x+34+ *per,y+35);
+    line(frame, x+ *per,y,x+newline+ *per,y);//X
+    line(frame, x+ *per,y,x+ *per,y+newline);//Y
+    line(frame, x+ *per,y+newline,x+newline+ *per,y+newline);//X
+    line(frame, x+newline+ *per,y,x+newline+ *per,y+newline+1);
 }
 
 
