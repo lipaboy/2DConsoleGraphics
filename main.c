@@ -48,15 +48,25 @@ int main()
         square(frame,&per,x,y,redF,size);
         square(frame, &per,x1,y1,yellowF,size);
         display(frame);
-        if (x+size>=x1 && x+size-x1<=1 && absolute(y-y1)>=0 && absolute(y-y1)<=size)
+        if (x+size>=x1 && absolute(x+size-x1)<=1 && absolute(y-y1)>=0 && absolute(y-y1)<=size)
         {
             is_right1=1-is_right1;
             is_right=1-is_right;
         }
-        if (x<=x1+size && x1+size-x<=1 && absolute(y-y1)>=0 && absolute(y-y1)<=size)
+        else if (x<=x1+size && absolute(x1+size-x)<=1 && absolute(y-y1)>=0 && absolute(y-y1)<=size)
         {
             is_right1=1-is_right1;
             is_right=1-is_right;
+        }
+        else if (y<=y1+size && absolute(y1+size-y)<=1 && absolute(x-x1)>=0 && absolute(x-x1)<=size)
+        {
+            is_Up1=1-is_Up1;
+            is_Up=1-is_Up;
+        }
+        else if (y+size>=y1 && absolute(y1-(y+size))<=1 && absolute(x-x1)>=0 && absolute(x-x1)<=size)
+        {
+            is_Up1=1-is_Up1;
+            is_Up=1-is_Up;
         }
         moveXY(&x,&is_right,74 -size);
         Sleep(100);
